@@ -61,14 +61,14 @@ First we perform a test where the difference between two rasters should be nothi
 
 ```shark-run:v3.2
 $ gdal_calc.py --quiet --cal="A - B" -A /data/srtm_34_11-v3.2.tif -B /data/srtm_34_11-v3.2.tif --outfile=/data/srtm-tri-no-diff.tif
-$ gdalinfo -mm -stats /data/srtm-tri-no-diff.tif
+$ gdalinfo -stats /data/srtm-tri-no-diff.tif | sed -n '/Band 1 Block/,$p'
 ```
 
 No we do the same but for the two TRIs generate with GDAL **v3.2** and **v3.3**.
 
 ```shark-run:v3.2
 $ gdal_calc.py --quiet --cal="A - B" -A /data/srtm_34_11-v3.2.tif -B /data/srtm_34_11-v3.3.tif --outfile=/data/srtm-tri-diff.tif
-$ gdalinfo -mm -stats /data/srtm-tri-diff.tif
+$ gdalinfo -stats /data/srtm-tri-diff.tif | sed -n '/Band 1 Block/,$p'
 ```
 
 The diff image can then be published locally by [Shark](https://github.com/quantifyearth/shark).

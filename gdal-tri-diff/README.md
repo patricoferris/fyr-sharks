@@ -72,66 +72,10 @@ gdaldem tri -q /shark/67bd64211719d28e4d801527fb7be7f0ee39d2ae6e5caf49ea2cff5431
 
 First we perform a test where the difference between two rasters should be nothing.
 
-```shark-run:v3.2:3c727073d836dfaa84e2e02d30d9869573f14ab287ee323d7a0cd12929d296cd
+```shark-run:v3.2:fad67d1e91fe610853d699fc46fa2a346c0dcf8ab62b1d4401ea2feb7ab71368
 gdal_calc.py --quiet --cal="A - B" -A /shark/1397a726f68551fc75e4b14b1454782f698e9c7b3c4bb889558040372de43fd3/srtm_34_11-v3.2.tif -B /shark/1397a726f68551fc75e4b14b1454782f698e9c7b3c4bb889558040372de43fd3/srtm_34_11-v3.2.tif --outfile=/data/srtm-tri-no-diff.tif
-gdalinfo -mm -stats /data/srtm-tri-no-diff.tif
-Driver: GTiff/GeoTIFF
-Files: /data/srtm-tri-no-diff.tif
-Size is 6037, 6058
-Coordinate System is:
-PROJCRS["WGS 84 / UTM zone 29N",
-    BASEGEOGCRS["WGS 84",
-        DATUM["World Geodetic System 1984",
-            ELLIPSOID["WGS 84",6378137,298.257223563,
-                LENGTHUNIT["metre",1]]],
-        PRIMEM["Greenwich",0,
-            ANGLEUNIT["degree",0.0174532925199433]],
-        ID["EPSG",4326]],
-    CONVERSION["UTM zone 29N",
-        METHOD["Transverse Mercator",
-            ID["EPSG",9807]],
-        PARAMETER["Latitude of natural origin",0,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8801]],
-        PARAMETER["Longitude of natural origin",-9,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8802]],
-        PARAMETER["Scale factor at natural origin",0.9996,
-            SCALEUNIT["unity",1],
-            ID["EPSG",8805]],
-        PARAMETER["False easting",500000,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8806]],
-        PARAMETER["False northing",0,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8807]]],
-    CS[Cartesian,2],
-        AXIS["(E)",east,
-            ORDER[1],
-            LENGTHUNIT["metre",1]],
-        AXIS["(N)",north,
-            ORDER[2],
-            LENGTHUNIT["metre",1]],
-    USAGE[
-        SCOPE["Engineering survey, topographic mapping."],
-        AREA["Between 12°W and 6°W, northern hemisphere between equator and 84°N, onshore and offshore. Algeria. Côte D'Ivoire (Ivory Coast). Faroe Islands. Guinea. Ireland. Jan Mayen. Mali. Mauritania. Morocco. Portugal. Sierra Leone. Spain. United Kingdom (UK). Western Sahara."],
-        BBOX[0,-12,84,-6]],
-    ID["EPSG",32629]]
-Data axis to CRS axis mapping: 1,2
-Origin = (-166334.596791530493647,1111418.032883527455851)
-Pixel Size = (92.214599842226619,-92.214599842226619)
-Metadata:
-  AREA_OR_POINT=Area
-Image Structure Metadata:
-  INTERLEAVE=BAND
-Corner Coordinates:
-Upper Left  ( -166334.597, 1111418.033) ( 15d 4' 8.96"W,  9d59'55.47"N)
-Lower Left  ( -166334.597,  552781.987) ( 14d59'59.13"W,  4d58'25.05"N)
-Upper Right (  390364.942, 1111418.033) ( 10d 0' 1.71"W, 10d 3'10.10"N)
-Lower Right (  390364.942,  552781.987) (  9d59'20.23"W,  5d 0' 1.15"N)
-Center      (  112015.173,  832100.010) ( 12d30'52.46"W,  7d30'49.49"N)
+gdalinfo -stats /data/srtm-tri-no-diff.tif | sed -n '/Band 1 Block/,$p'
 Band 1 Block=6037x1 Type=Float32, ColorInterp=Gray
-    Computed Min/Max=0.000,0.000
   Minimum=0.000, Maximum=0.000, Mean=0.000, StdDev=0.000
   NoData Value=3.40282346600000016e+38
   Metadata:
@@ -145,66 +89,10 @@ Band 1 Block=6037x1 Type=Float32, ColorInterp=Gray
 
 No we do the same but for the two TRIs generate with GDAL **v3.2** and **v3.3**.
 
-```shark-run:v3.2:93d37053a1d4b047b771a8e23281df9dd3966773da8a35bdafae747a762c2728
+```shark-run:v3.2:3dbbd56760c5168b0b1d0594b09b299cc99934453eb1b05bf207233c547f2825
 gdal_calc.py --quiet --cal="A - B" -A /shark/1397a726f68551fc75e4b14b1454782f698e9c7b3c4bb889558040372de43fd3/srtm_34_11-v3.2.tif -B /shark/4c12ad4f4d6d47ef5e8922b63887161e18604d62464e081ce6290804e8934d2e/srtm_34_11-v3.3.tif --outfile=/data/srtm-tri-diff.tif
-gdalinfo -mm -stats /data/srtm-tri-diff.tif
-Driver: GTiff/GeoTIFF
-Files: /data/srtm-tri-diff.tif
-Size is 6037, 6058
-Coordinate System is:
-PROJCRS["WGS 84 / UTM zone 29N",
-    BASEGEOGCRS["WGS 84",
-        DATUM["World Geodetic System 1984",
-            ELLIPSOID["WGS 84",6378137,298.257223563,
-                LENGTHUNIT["metre",1]]],
-        PRIMEM["Greenwich",0,
-            ANGLEUNIT["degree",0.0174532925199433]],
-        ID["EPSG",4326]],
-    CONVERSION["UTM zone 29N",
-        METHOD["Transverse Mercator",
-            ID["EPSG",9807]],
-        PARAMETER["Latitude of natural origin",0,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8801]],
-        PARAMETER["Longitude of natural origin",-9,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8802]],
-        PARAMETER["Scale factor at natural origin",0.9996,
-            SCALEUNIT["unity",1],
-            ID["EPSG",8805]],
-        PARAMETER["False easting",500000,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8806]],
-        PARAMETER["False northing",0,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8807]]],
-    CS[Cartesian,2],
-        AXIS["(E)",east,
-            ORDER[1],
-            LENGTHUNIT["metre",1]],
-        AXIS["(N)",north,
-            ORDER[2],
-            LENGTHUNIT["metre",1]],
-    USAGE[
-        SCOPE["Engineering survey, topographic mapping."],
-        AREA["Between 12°W and 6°W, northern hemisphere between equator and 84°N, onshore and offshore. Algeria. Côte D'Ivoire (Ivory Coast). Faroe Islands. Guinea. Ireland. Jan Mayen. Mali. Mauritania. Morocco. Portugal. Sierra Leone. Spain. United Kingdom (UK). Western Sahara."],
-        BBOX[0,-12,84,-6]],
-    ID["EPSG",32629]]
-Data axis to CRS axis mapping: 1,2
-Origin = (-166334.596791530493647,1111418.032883527455851)
-Pixel Size = (92.214599842226619,-92.214599842226619)
-Metadata:
-  AREA_OR_POINT=Area
-Image Structure Metadata:
-  INTERLEAVE=BAND
-Corner Coordinates:
-Upper Left  ( -166334.597, 1111418.033) ( 15d 4' 8.96"W,  9d59'55.47"N)
-Lower Left  ( -166334.597,  552781.987) ( 14d59'59.13"W,  4d58'25.05"N)
-Upper Right (  390364.942, 1111418.033) ( 10d 0' 1.71"W, 10d 3'10.10"N)
-Lower Right (  390364.942,  552781.987) (  9d59'20.23"W,  5d 0' 1.15"N)
-Center      (  112015.173,  832100.010) ( 12d30'52.46"W,  7d30'49.49"N)
+gdalinfo -stats /data/srtm-tri-diff.tif | sed -n '/Band 1 Block/,$p'
 Band 1 Block=6037x1 Type=Float32, ColorInterp=Gray
-    Computed Min/Max=-672.854,0.000
   Minimum=-672.854, Maximum=0.000, Mean=-15.297, StdDev=14.790
   NoData Value=3.40282346600000016e+38
   Metadata:
@@ -219,7 +107,7 @@ Band 1 Block=6037x1 Type=Float32, ColorInterp=Gray
 The diff image can then be published locally by [Shark](https://github.com/quantifyearth/shark).
 
 ```shark-publish
-/obuilder-zfs/result/93d37053a1d4b047b771a8e23281df9dd3966773da8a35bdafae747a762c2728/.zfs/snapshot/snap/rootfs/data/srtm-tri-diff.tif
+/obuilder-zfs/result/3dbbd56760c5168b0b1d0594b09b299cc99934453eb1b05bf207233c547f2825/.zfs/snapshot/snap/rootfs/data/srtm-tri-diff.tif
 ```
 
 

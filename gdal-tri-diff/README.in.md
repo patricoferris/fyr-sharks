@@ -51,7 +51,7 @@ We can do this with tool packaged with GDAL **v3.2**.
 $ gdaldem tri -q /data/srtm_34_11.tif /data/srtm_34_11-v3.2.tif
 ```
 
-And then again for the same tool package with GDAL **v3.2**.
+And then again for the same tool package with GDAL **v3.3**.
 
 ```shark-run:v3.3
 $ gdaldem tri -q /data/srtm_34_11.tif /data/srtm_34_11-v3.3.tif

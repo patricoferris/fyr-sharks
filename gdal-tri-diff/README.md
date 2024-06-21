@@ -64,7 +64,7 @@ We can do this with tool packaged with GDAL **v3.2**.
 gdaldem tri -q /shark/67bd64211719d28e4d801527fb7be7f0ee39d2ae6e5caf49ea2cff54314415d5/srtm_34_11.tif /data/srtm_34_11-v3.2.tif
 ```
 
-And then again for the same tool package with GDAL **v3.2**.
+And then again for the same tool package with GDAL **v3.3**.
 
 ```shark-run:v3.3:4c12ad4f4d6d47ef5e8922b63887161e18604d62464e081ce6290804e8934d2e
 gdaldem tri -q /shark/67bd64211719d28e4d801527fb7be7f0ee39d2ae6e5caf49ea2cff54314415d5/srtm_34_11.tif /data/srtm_34_11-v3.3.tif
